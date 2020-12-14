@@ -18,8 +18,8 @@ async def home():
 async def reserva():# funcion root
     return {"message": db_reserva}
 
-@api.post("/reserva/crear/{id}")# se actualiza reserva
-async def crea_reserva(id: str, reserve:Reserva):
+@api.post("/reserva/crear/")# se actualiza reserva
+async def crea_reserva(reserve:Reserva):
     createrv = crear_reserva(reserve)
     if createrv:
          return {"mensaje":"Reserva creada exitosamente"}

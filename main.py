@@ -4,6 +4,8 @@ from db.db_reservas import Reserva
 from models.db_reservas_model import ReservaInfo
 import datetime
 from db.db_reservas import db_reserva
+from db.db_reservas import get_reservas
+from db.db_reservas import crear_reserva
 
 app = FastAPI() #comunicacion capa logica y capa presentacion
 
@@ -16,23 +18,11 @@ async def root():
 async def reserva():# funcion root
     return {"message": db_reserva}
 
-@app.get("/reserva/{id}")# GET reserva por ID
-async def get_reserva_by_id(id : int):# funcion reserva
-    if id in db_reserva:
-        return {"message": db_reserva[id]}
-    raise HTTPException(status_code = 404, detail="La reserva no existe!")
-
-@app.post("/reserva/nuevareserva")# se actualiza reserva
-async def crear_reserva(rvinfo : ReservaInfo):
-    db_reserva[rvinfo.id]= rvinfo
-    return rvinfo
-
-@app.delete("/reserva/borrarreserva")
-async def eliminar_reserva(rvinfo : ReservaInfo):
-    del db_reserva[rvinfo.id]
-    return rvinfo
-
-@app.put("/reserva/actualizarreserva")
-async def crear_reserva(rvinfo : ReservaInfo):
-    db_reserva[rvinfo.id]= rvinfo
-    return rvinfo
+@app.post("/reserva/crear/{id}")# se actualiza reserva
+async def crea_reserva(id: str, reserve:Reserva):
+    createrv = crear_reserva(reserve)
+    if createrv:
+         return {"mensaje":"Reserva creada exitosamente"}
+    else:
+        raise HTTPException(
+           status_code=400, detail="error, Reserva con ese id ya exisitia")

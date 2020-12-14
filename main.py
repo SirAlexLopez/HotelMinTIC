@@ -7,13 +7,18 @@ from db.db_reservas import db_reserva
 from db.db_reservas import get_reservas
 from db.db_reservas import crear_reserva
 
-app = FastAPI() #comunicacion capa logica y capa presentacion
+api = FastAPI() #comunicacion capa logica y capa presentacion
 
-@app.get("/reserva/") # retornar la DB completa
+@api.get("/")
+async def home():
+    return {"message": "Bienvenido a su Hotel MinTIC"}
+
+
+@api.get("/reserva/") # retornar la DB completa
 async def reserva():# funcion root
     return {"message": db_reserva}
 
-@app.post("/reserva/crear/{id}")# se actualiza reserva
+@api.post("/reserva/crear/{id}")# se actualiza reserva
 async def crea_reserva(id: str, reserve:Reserva):
     createrv = crear_reserva(reserve)
     if createrv:

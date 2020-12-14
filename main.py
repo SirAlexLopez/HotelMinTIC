@@ -9,11 +9,6 @@ from db.db_reservas import crear_reserva
 
 app = FastAPI() #comunicacion capa logica y capa presentacion
 
-
-@app.get("/") # retornar mensaje
-async def root():
-    return {"message": "Bienvenidos Hotel Mintic"}
-
 @app.get("/reserva/") # retornar la DB completa
 async def reserva():# funcion root
     return {"message": db_reserva}

@@ -21,7 +21,7 @@ async def reserva():# funcion root
 @api.post("/reserva/crear/")# se actualiza reserva
 async def crea_reserva(reserve:Reserva):
     createrv = crear_reserva(reserve)
-    if createrv:
+    if createrv is True:
          return {"mensaje":"Reserva creada exitosamente"}
     else:
         raise HTTPException(

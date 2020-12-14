@@ -52,7 +52,7 @@ def get_reservas (id:int):# obteniendo con GET un objeto
         return None
 
 def crear_reserva(reserva:Reserva):# actualizamos con PUT el objeto
-    if id in db_reserva:
+    if reserva.id in db_reserva.keys():
         return False
     else:
         db_reserva[reserva.id] = reserva

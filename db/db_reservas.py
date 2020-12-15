@@ -51,6 +51,13 @@ def get_reservas (id:int):# obteniendo con GET un objeto
     else:
         return None
 
+def obtener_reservas():
+    # Haga lo que tenga que hacer para conectarse a la base de datos y obtener todas las ordenes
+    lista_reservas = []
+    for e in db_reserva:
+        lista_reservas.append(db_reserva[e])
+    return lista_reservas
+
 def crear_reserva(reserva:Reserva):# actualizamos con PUT el objeto
     if reserva.id in db_reserva.keys():
         return False

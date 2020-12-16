@@ -13,7 +13,7 @@ api = FastAPI() #comunicacion capa logica y capa presentacion
 
 origins = [
     "http://localhost:8080",
-    "https://hotelmintic-app.herokuapp.com/"
+    "https://hotelmintic-app.herokuapp.com"
 ]
 
 api.add_middleware(

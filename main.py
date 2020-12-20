@@ -1,13 +1,8 @@
-from fastapi import FastAPI
-from fastapi import HTTPException
+from fastapi import FastAPI,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from db.db_reservas import Reserva
 from models.db_reservas_model import ReservaInfo
+from db.db_reservas import Reserva,db_reserva,get_reservas,crear_reserva,obtener_reservas,eliminar_reserva
 import datetime
-from db.db_reservas import db_reserva
-from db.db_reservas import get_reservas
-from db.db_reservas import crear_reserva
-from db.db_reservas import obtener_reservas
 
 api = FastAPI() #comunicacion capa logica y capa presentacion
 
@@ -43,3 +38,12 @@ async def crea_reserva(rvinfo:ReservaInfo):
     else:
         raise HTTPException(
            status_code=400, detail="error, Reserva con ese id ya exisitia")
+
+@api.delete("/reserva/borrar/")
+async def delete_reserva(rvinfo:ReservaInfo):
+    deleterv = eliminar_reserva(rvinfo)
+    if deleterv is True:
+        return {"mensaje":"Reserva borrada exitosamente"}
+    else:
+        raise HTTPException(
+           status_code=400, detail="error, Reserva con ese id no existe")

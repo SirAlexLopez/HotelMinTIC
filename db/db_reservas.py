@@ -65,8 +65,8 @@ def crear_reserva(reserva:Reserva):# actualizamos con PUT el objeto
         db_reserva[reserva.id] = reserva
         return True
 
-def eliminar_reserva(id:int):
-    if id in db_reserva.keys():
+def eliminar_reserva(reserva:Reserva):
+    if reserva.id in db_reserva.keys():
         del db_reserva[id]
         return True
     else:

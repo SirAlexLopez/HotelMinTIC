@@ -40,7 +40,7 @@ async def crea_reserva(rvinfo:ReservaInfo):
            status_code=400, detail="error, Reserva con ese id ya exisitia")
 
 @api.delete("/reserva/borrar/")
-async def delete_reserva(id:ReservaInfo.id):
+async def delete_reserva(id):
     deleterv = eliminar_reserva(id)
     if deleterv is True:
         return {"mensaje":"Reserva borrada exitosamente"}
